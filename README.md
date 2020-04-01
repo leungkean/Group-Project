@@ -9,4 +9,6 @@ Links to sources:
 - https://opensourc.es/blog/he2latex
 - http://cs229.stanford.edu/proj2014/Quan%20Nguyen,%20Maximillian%20Wang,%20Le%20Cheng%20Fan,HandwritingRecognition.pdf
 - https://github.com/Sunisc/Analyzing-House-Prices-Holistically-Using-Machine-Learning/blob/master/project_report.pdf
-- 
+
+Link to Starter Code:
+- https://opensourc.es/blog/he2latex
