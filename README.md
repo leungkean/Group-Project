@@ -12,3 +12,4 @@ Links to sources:
 
 Link to Starter Code:
 - https://opensourc.es/blog/he2latex
+- https://github.com/Wikunia/HE2LaTeX
