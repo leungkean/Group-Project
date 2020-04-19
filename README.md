@@ -1,5 +1,6 @@
 # Group-Project
 
+(For Handwritten Recognition)
 Links to sources:
 - http://cs229.stanford.edu/proj2017/final-reports/5243453.pdf
 - https://github.com/ysoullard/CTCModel
@@ -13,3 +14,7 @@ Links to sources:
 Link to Starter Code:
 - https://opensourc.es/blog/he2latex
 - https://github.com/Wikunia/HE2LaTeX
+
+Current Project (Using Chest X-Ray Images to determine COVID-19 diagnosis)
+Link to database:
+- https://www.kaggle.com/praveengovi/coronahack-chest-xraydataset
