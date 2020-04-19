@@ -25,4 +25,5 @@ Link to database (database includes link to starter code):
 Helpful to process the data:
 - https://www.kaggle.com/praveengovi/coronahack-eda-and-baseline-model-final#Exploratory-Data-Analysis
 
-# Alternate Project (https://github.com/byrdofafeather/ResearchTestingBed)
+# Alternate Project (Question Generation)
+- (https://github.com/byrdofafeather/ResearchTestingBed)
