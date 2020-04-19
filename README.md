@@ -28,3 +28,7 @@ Helpful to process the data:
 
 # Alternate Project (Question Generation)
 - (https://github.com/byrdofafeather/ResearchTestingBed)
+
+# Sources:
+- https://www.kaggle.com/stanfordu/stanford-question-answering-dataset
+- https://www.aclweb.org/anthology/D18-1424.pdf
