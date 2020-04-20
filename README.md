@@ -16,11 +16,19 @@ Link to Starter Code:
 - https://opensourc.es/blog/he2latex
 - https://github.com/Wikunia/HE2LaTeX
 
-# Current Project (Using Chest X-Ray Images to determine COVID-19 diagnosis)
+# Project (Using Chest X-Ray Images to determine COVID-19 diagnosis)
 Link to database (database includes link to starter code):
 - https://www.kaggle.com/praveengovi/coronahack-chest-xraydataset
 
 # Sources:
 - https://www.nature.com/articles/s41598-019-42557-4
+
 Helpful to process the data:
 - https://www.kaggle.com/praveengovi/coronahack-eda-and-baseline-model-final#Exploratory-Data-Analysis
+
+# CURRENT Project (Question Generation)
+- (https://github.com/byrdofafeather/ResearchTestingBed)
+
+# Sources:
+- https://www.kaggle.com/stanfordu/stanford-question-answering-dataset
+- https://www.aclweb.org/anthology/D18-1424.pdf
