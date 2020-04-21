@@ -1,30 +1,20 @@
-# Group-Project
+<h1>Setup</h1>
 
-# (For Handwritten Recognition) 
-# ** Changed (No longer current project)** 
-Links to sources:
-- http://cs229.stanford.edu/proj2017/final-reports/5243453.pdf
-- https://github.com/ysoullard/CTCModel
-- https://www.kaggle.com/xainano/handwrittenmathsymbols/discussion/85277
-- https://arxiv.org/pdf/1904.09150.pdf
-- https://github.com/Emmarex/Mathematical-Handwriting-recognition
-- https://opensourc.es/blog/he2latex
-- http://cs229.stanford.edu/proj2014/Quan%20Nguyen,%20Maximillian%20Wang,%20Le%20Cheng%20Fan,HandwritingRecognition.pdf
-- https://github.com/Sunisc/Analyzing-House-Prices-Holistically-Using-Machine-Learning/blob/master/project_report.pdf
+1) Install Pytorch, Torchvision, transformers, tensorboard
+(pip install pytorch torchvision transformers tensorboard) 
 
-Link to Starter Code:
-- https://opensourc.es/blog/he2latex
-- https://github.com/Wikunia/HE2LaTeX
+2) Download SciQ dataset: https://allenai.org/data/sciq and unzip it in the directory in which you unzipped
+this in a file titled Sciq
 
-# Project (Using Chest X-Ray Images to determine COVID-19 diagnosis)
-Link to database (database includes link to starter code):
-- https://www.kaggle.com/praveengovi/coronahack-chest-xraydataset
+3) run python pre_processing_sciq.py 
 
-# Sources:
-- https://www.nature.com/articles/s41598-019-42557-4
+4) Now in src.py it is setup to train the model. 
 
-Helpful to process the data:
-- https://www.kaggle.com/praveengovi/coronahack-eda-and-baseline-model-final#Exploratory-Data-Analysis
+With a little modification to the forward pass (in particular taking the que on how to 
+output the actual output of the model in the print statements in the train() function) a 
+system can be setup to reliably test the model of the test set that is created during pre_processing. The 
+data the is put into the train function can simply be changed by changing the path that is put into it in the 
+build_model_and_train_function
 
 # CURRENT Project (Question Generation)
 - (https://github.com/byrdofafeather/ResearchTestingBed)
