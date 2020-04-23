@@ -1,3 +1,4 @@
+# Question Generation using Paragraphs
 <h1>Setup</h1>
 
 1) Install Pytorch, Torchvision, transformers, tensorboard
@@ -16,7 +17,7 @@ system can be setup to reliably test the model of the test set that is created d
 data the is put into the train function can simply be changed by changing the path that is put into it in the 
 build_model_and_train_function
 
-# CURRENT Project (Question Generation)
+# Source Code
 - (https://github.com/byrdofafeather/ResearchTestingBed)
 
 # Sources:
