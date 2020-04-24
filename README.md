@@ -23,3 +23,6 @@ build_model_and_train_function
 # Sources:
 - https://www.kaggle.com/stanfordu/stanford-question-answering-dataset
 - https://www.aclweb.org/anthology/D18-1424.pdf
+
+# PDF Overleaf Doc
+- https://www.overleaf.com/project/5e99fb9f43ff67000121a464
