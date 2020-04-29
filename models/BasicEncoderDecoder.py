@@ -1,8 +1,12 @@
 import torch
-
+import random as rand
 import torch.nn as nn
 
 BERT_VOCAB_SIZE = 28996
+MAX_OUTPUT = 20
+torch.set_default_tensor_type('torch.cuda.FloatTensor')
+BERT_MODEL = torch.hub.load('huggingface/pytorch-transformers', 'model', 'bert-base-uncased')
+START_TOKEN = BERT_MODEL(torch.tensor([[101]]))[0]
 
 
 class BiAttnGRUEncoder(nn.Module):
@@ -105,7 +109,7 @@ class BiAttnGRUEncoder(nn.Module):
 
 
 class AttnGruDecoder(nn.Module):
-	def __init__(self, input_size, hidden_size):
+	def __init__(self, input_size, hidden_size, teacher_ratio):
 		"""
 		Note: This model expects input to be (1, input size) not (input size, 1)
 		:param input_size: Size of row vector inputs
@@ -125,29 +129,65 @@ class AttnGruDecoder(nn.Module):
 				continue
 			nn.init.xavier_uniform_(w)
 
+	def greedy_search(self, hidden_state, encoder_attention, BERT_ENCODER=None):
+		preds = torch.zeros([MAX_OUTPUT, 1])
+		generated_sequence = []
+		no_outputted = 0
+		current_word = START_TOKEN[0]
+		while True:
+			if no_outputted == 0:
+				hidden_state = self.gru_module(current_word, hidden_state)
+			else:
+				hidden_state = self.gru_module(current_word, hidden_state)
+
+			preds[no_outputted, :] = torch.argmax(self.softmax(self.prediction_layer(hidden_state)))
+
+			current_word = BERT_MODEL(torch.tensor(preds[no_outputted, :].unsqueeze(0).type(torch.LongTensor), device='cuda'))[0][0]
+			generated_sequence.append(BERT_ENCODER.decode(torch.tensor([preds[no_outputted: no_outputted + 1, 0]])))
+			if generated_sequence[no_outputted] == 102: break
+
+			attn_layer = self.decoder_att_linear(hidden_state)
+			attn_layer = self.softmax(torch.matmul(attn_layer, torch.t(encoder_attention[0])))
+			attn_layer = torch.matmul(attn_layer, encoder_attention[0])
+			attn_layer = torch.cat((attn_layer, hidden_state), dim=1)
+			hidden_state = self.tanh(self.decoder_attn_weighted_ctx(attn_layer))
+			if no_outputted == MAX_OUTPUT:
+				break
+			no_outputted += 1
+			print(generated_sequence)
+		return generated_sequence
+
 	def forward(self, x, hidden_state, encoder_attention):
 		"""
 		:param x: The ground truth that the model is trying to predict
 		:param hidden_state: The last hidden state of the encoder
 		:param encoder_attention: The attention as calculated by the encoder
-		:return: 
+		:return:
 		"""
-		batch_size = x.shape[0]
-		no_words = x.shape[1]
-		preds = torch.zeros([batch_size, no_words, BERT_VOCAB_SIZE])
-		for batch_idx in range(0, batch_size):
-			for word_idx in range(0, no_words):
-				current_word = x[batch_idx, word_idx: word_idx + 1, :]
-				if word_idx == 0:
-					hidden_state = self.gru_module(current_word, hidden_state)
-				else:
-					hidden_state = self.gru_module(current_word, hidden_state)
+		if self.training:
+			batch_size = x.shape[0]
+			no_words = x.shape[1]
+			preds = torch.zeros([batch_size, no_words, BERT_VOCAB_SIZE])
+			for batch_idx in range(0, batch_size):
+				for word_idx in range(0, no_words):
+					# TODO: Use Teacherforcing parameter (for now always 50% chance)
+					if rand.randint(0, 1) == 1 or word_idx == 0:
+						current_word = x[batch_idx, word_idx: word_idx + 1, :]
+					else:
+						current_word = BERT_MODEL(torch.tensor(torch.argmax(preds[batch_idx, word_idx - 1, :]).unsqueeze(0).unsqueeze(0).type(torch.LongTensor), device='cuda'))[0][0]
+					if word_idx == 0:
+						hidden_state = self.gru_module(current_word, hidden_state)
+					else:
+						hidden_state = self.gru_module(current_word, hidden_state)
 
-				preds[batch_idx, word_idx, :] = self.prediction_layer(hidden_state)
+					preds[batch_idx, word_idx, :] = self.prediction_layer(hidden_state)
 
-				attn_layer = self.decoder_att_linear(hidden_state)
-				attn_layer = self.softmax(torch.matmul(attn_layer, torch.t(encoder_attention[batch_idx])))
-				attn_layer = torch.matmul(attn_layer, encoder_attention[batch_idx])
-				attn_layer = torch.cat((attn_layer, hidden_state), dim=1)
-				hidden_state = self.tanh(self.decoder_attn_weighted_ctx(attn_layer))
-		return preds
+					attn_layer = self.decoder_att_linear(hidden_state)
+					attn_layer = self.softmax(torch.matmul(attn_layer, torch.t(encoder_attention[batch_idx])))
+					attn_layer = torch.matmul(attn_layer, encoder_attention[batch_idx])
+					attn_layer = torch.cat((attn_layer, hidden_state), dim=1)
+					hidden_state = self.tanh(self.decoder_attn_weighted_ctx(attn_layer))
+			return preds
+		else:
+			BERT_ENCODER = torch.hub.load('huggingface/pytorch-transformers', 'tokenizer', 'bert-base-cased')
+			return self.greedy_search(hidden_state, encoder_attention, BERT_ENCODER)
