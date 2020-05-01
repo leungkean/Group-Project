@@ -7,7 +7,7 @@
 2) Download SciQ dataset: https://allenai.org/data/sciq and unzip it in the directory in which you unzipped
 this in a file titled Sciq
 
-3) run python pre_processing_sciq.py 
+3) Run python pre_processing_sciq.py 
 
 4) Now in src.py it is setup to train the model. 
 
