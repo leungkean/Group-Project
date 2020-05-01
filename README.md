@@ -17,12 +17,12 @@ system can be setup to reliably test the model of the test set that is created d
 data the is put into the train function can simply be changed by changing the path that is put into it in the 
 build_model_and_train_function
 
-# Source Code
+## Source Code
 - (https://github.com/byrdofafeather/ResearchTestingBed)
 
-# Sources
+## Sources
 - https://www.kaggle.com/stanfordu/stanford-question-answering-dataset
 - https://www.aclweb.org/anthology/D18-1424.pdf
 
-# PDF Overleaf Doc
+## PDF Overleaf Doc
 - https://www.overleaf.com/project/5e99fb9f43ff67000121a464
