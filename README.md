@@ -7,9 +7,9 @@
 2) Download SciQ dataset: https://allenai.org/data/sciq and unzip it in the directory in which you unzipped
 this in a file titled Sciq
 
-3) Run python pre_processing_sciq.py 
+3) Run python pre_processing_sciq.py
 
-4) Now in src.py it is setup to train the model. 
+4) Now in src.py it is setup to train the model
 
 With a little modification to the forward pass (in particular taking the que on how to 
 output the actual output of the model in the print statements in the train() function) a 
@@ -20,7 +20,7 @@ build_model_and_train_function
 # Source Code
 - (https://github.com/byrdofafeather/ResearchTestingBed)
 
-# Sources:
+# Sources
 - https://www.kaggle.com/stanfordu/stanford-question-answering-dataset
 - https://www.aclweb.org/anthology/D18-1424.pdf
 
