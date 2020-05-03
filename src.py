@@ -166,7 +166,7 @@ def build_model_and_train():
 
     # This creates a dataset compatible with pytorch that auto-shuffles and we don't have to worry about
     # indexing errors
-    data = DataLoader(QADataset("data/sciq_train_set"), shuffle=True)
+    data = DataLoader(QADataset("data/sciq_test_set"), shuffle=True)
 
     if not os.path.exists("pre_trained/weight_saves"): os.mkdir("pre_trained/weight_saves")
 
