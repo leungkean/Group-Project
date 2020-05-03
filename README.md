@@ -9,13 +9,7 @@ this in a file titled Sciq
 
 3) Run python pre_processing_sciq.py
 
-4) Now in src.py it is setup to train the model
-
-With a little modification to the forward pass (in particular taking the que on how to 
-output the actual output of the model in the print statements in the train() function) a 
-system can be setup to reliably test the model of the test set that is created during pre_processing. The 
-data the is put into the train function can simply be changed by changing the path that is put into it in the 
-build_model_and_train_function
+4) Now run src.py and the model will randomlly select items from the test data and predict an output using greedy search  
 
 ## Sources
 - https://www.kaggle.com/stanfordu/stanford-question-answering-dataset
