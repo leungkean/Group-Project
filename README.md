@@ -2,7 +2,7 @@
 <h1>Setup</h1>
 
 1) Install Pytorch, Torchvision, transformers, tensorboard
-(pip install pytorch torchvision transformers tensorboard) 
+(pip3 install pytorch torchvision transformers tensorboard) 
 
 2) Download SciQ dataset: https://allenai.org/data/sciq and unzip it in the directory in which you unzipped
 this in a file titled Sciq
