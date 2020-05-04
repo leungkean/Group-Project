@@ -10,7 +10,6 @@ writer = SummaryWriter("runs/teacher_forcing_havled")
 from models.BasicEncoderDecoder import AttnGruDecoder, BiAttnGRUEncoder
 import os
 
-torch.set_default_tensor_type('torch.cuda.FloatTensor')
 
 BERT_MODEL = torch.hub.load('huggingface/pytorch-transformers', 'model', 'bert-base-uncased')
 BERT_TOKENIZER = torch.hub.load('huggingface/pytorch-transformers', 'tokenizer', 'bert-base-cased')
