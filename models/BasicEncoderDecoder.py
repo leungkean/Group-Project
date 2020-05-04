@@ -4,7 +4,6 @@ import torch.nn as nn
 
 BERT_VOCAB_SIZE = 28996
 MAX_OUTPUT = 20
-torch.set_default_tensor_type('torch.cuda.FloatTensor')
 BERT_MODEL = torch.hub.load('huggingface/pytorch-transformers', 'model', 'bert-base-uncased')
 START_TOKEN = BERT_MODEL(torch.tensor([[101]]))[0]
 
@@ -142,7 +141,7 @@ class AttnGruDecoder(nn.Module):
 
 			preds[no_outputted, :] = torch.argmax(self.softmax(self.prediction_layer(hidden_state)))
 
-			current_word = BERT_MODEL(torch.tensor(preds[no_outputted, :].unsqueeze(0).type(torch.LongTensor), device='cuda'))[0][0]
+			current_word = BERT_MODEL(torch.tensor(preds[no_outputted, :].unsqueeze(0).type(torch.LongTensor), device='cpu'))[0][0]
 			generated_sequence.append(BERT_ENCODER.decode(torch.tensor([preds[no_outputted: no_outputted + 1, 0]])))
 			if generated_sequence[no_outputted] == 102: break
 
