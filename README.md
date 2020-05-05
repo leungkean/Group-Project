@@ -1,4 +1,4 @@
-# Question Generation using Paragraphs Code Setup
+# Question Generation in an Educational Context
 <h1>Setup</h1>
 
 1) Install Pytorch, Torchvision, transformers, tensorboard
